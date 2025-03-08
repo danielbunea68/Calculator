@@ -20,5 +20,18 @@ namespace calculator
         {
             InitializeComponent();
         }
+
+        private void B1_Click(object sender, RoutedEventArgs e)
+        {
+           /// ProgramerMode programerMode = new(this.DataContext)
+           // programerMode.ShowDialog();
+        }
+
+        private void B2_Click(object sender, RoutedEventArgs e)
+        {
+            //StandardMode standardMode = new(this.DataContext)
+           // standardMode.ShowDialog();
+            
+        }
     }
 }

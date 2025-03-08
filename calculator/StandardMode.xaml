@@ -1,0 +1,34 @@
+﻿<Window x:Class="calculator.StandardMode"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:calculator"
+        mc:Ignorable="d"
+        Title="StandardMode" Height="450" Width="350">
+    <Grid Margin="10" RenderTransformOrigin="0.5,0.5">
+        <Grid.RowDefinitions>
+            <!--These is for output-->
+            <RowDefinition Height="100"/>
+            
+            <!--These are for the numbers-->
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+
+
+
+
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="82.5"/>
+            <ColumnDefinition Width="82.5"/>
+            <ColumnDefinition Width="82.5"/>
+            <ColumnDefinition Width="82.5"/>
+                              
+        </Grid.ColumnDefinitions>
+    </Grid>
+</Window>
