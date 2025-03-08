@@ -16,22 +16,57 @@ namespace calculator
     /// </summary>
     public partial class MainWindow : Window
     {
+        string output = "";
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void B1_Click(object sender, RoutedEventArgs e)
-        {
-           /// ProgramerMode programerMode = new(this.DataContext)
-           // programerMode.ShowDialog();
-        }
+       
 
-        private void B2_Click(object sender, RoutedEventArgs e)
+        private void NumBtn_Click(object sender, RoutedEventArgs e)
         {
-            //StandardMode standardMode = new(this.DataContext)
-           // standardMode.ShowDialog();
-            
+            string name = ((Button)sender).Name;
+            switch (name)
+            {
+                case "OneBtn":
+                    output += "1";
+                    OutputTextBlock.Text = output;
+                    break;
+                case "TwoBtn":
+                    output += "2";
+                    OutputTextBlock.Text = output;
+                    break;
+                case "ThreeBtn":
+                    output += "3";
+                    OutputTextBlock.Text = output;
+                    break;
+                case "FourBtn":
+                    output += "4";
+                    OutputTextBlock.Text = output;
+                    break;
+                case "FiveBtn":
+                    output += "5";
+                    OutputTextBlock.Text = output;
+                    break;
+                case "SixBtn":
+                    output += "6";
+                    OutputTextBlock.Text = output;
+                    break;
+                case "SevenBtn":
+                    output += "1";
+                    OutputTextBlock.Text = output;
+                    break;
+                case "EightBtn":
+                    output += "1";
+                    OutputTextBlock.Text = output;
+                    break;
+                case "NineBtn":
+                    output += "1";
+                    OutputTextBlock.Text = output;
+                    break;
+
+            }
         }
     }
 }

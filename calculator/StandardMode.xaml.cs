@@ -24,9 +24,11 @@ namespace calculator
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void NumBtn_Click(object sender, RoutedEventArgs e)
         {
 
+            string name = ((Button)sender).Name;
+            MessageBox.Show(name);
         }
     }
 }
