@@ -114,7 +114,7 @@ namespace calculator
                 case "Minus":
                     output = (temp - outputTemp).ToString();
                     break;
-                case "Multiply":
+                case "Times":
                     output = (temp * outputTemp).ToString();
                     break;
                 case "Divide":
