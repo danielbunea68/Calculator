@@ -34,6 +34,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
 
         </Grid.ColumnDefinitions>
 
@@ -47,9 +48,60 @@
             FontSize="50"
             TextAlignment="Right"/>
 
+        <Button x:Name="MemoryBtn" 
+              Content="Memory" 
+              Grid.Row="0" 
+              Grid.Column="4"
+              FontSize="10"
+              FontWeight="Bold"
+              Click="MemoryShowBtn_Click" Height="45" Grid.RowSpan="2" VerticalAlignment="Top"/>
+
+
+        <Button x:Name="MemoryClearBtn" 
+             Content="MC" 
+             Grid.Row="1" 
+             Grid.Column="0"
+             FontSize="25"
+             FontWeight="Bold"
+             Click="MemoryClearBtn_Click" Height="45" Grid.RowSpan="2" VerticalAlignment="Top"/>
+
+        <Button x:Name="MemoryRecallBtn" 
+             Content="MR" 
+             Grid.Row="1" 
+             Grid.Column="1"
+             FontSize="25"
+             FontWeight="Bold"
+             Click="MemoryRecallBtn_Click"/>
+
+        <Button x:Name="MemoryAddBtn" 
+             Content="M+" 
+             Grid.Row="1" 
+             Grid.Column="2"
+             FontSize="25"
+             FontWeight="Bold"
+             Click="MemoryAddBtn_Click" Height="45" Grid.RowSpan="2" VerticalAlignment="Top"/>
+
+        <Button x:Name="MemorySubstractBtn" 
+            Content="M-" 
+            Grid.Row="1" 
+            Grid.Column="3"
+            FontSize="25"
+            FontWeight="Bold"
+            Click="MemorySubstractBtn_Click" Height="45" Grid.RowSpan="2" VerticalAlignment="Top"/>
+
+
+        <Button x:Name="MemoryStoreBtn" 
+            Content="MS" 
+            Grid.Row="1" 
+            Grid.Column="4"
+            FontSize="25"
+            FontWeight="Bold"
+            Click="MemoryStoreBtn_Click" Height="45" Grid.RowSpan="2" VerticalAlignment="Top"/>
+
+
         <Button x:Name="SevenBtn" 
              Content="7" 
-             Grid.Row="3" 
+             Grid.Row="4" 
              Grid.Column="0"
              FontSize="25"
              FontWeight="Bold"
@@ -57,7 +109,7 @@
 
         <Button x:Name="EightBtn" 
             Content="8" 
-            Grid.Row="3" 
+            Grid.Row="4" 
             Grid.Column="1"
             FontSize="25"
             FontWeight="Bold"
@@ -65,7 +117,7 @@
 
         <Button x:Name="NineBtn" 
             Content="9" 
-            Grid.Row="3" 
+            Grid.Row="4" 
             Grid.Column="2"
             FontSize="25"
             FontWeight="Bold"
@@ -73,7 +125,7 @@
 
         <Button x:Name="FourBtn" 
             Content="4" 
-            Grid.Row="4" 
+            Grid.Row="5" 
             Grid.Column="0"
             FontSize="25"
             FontWeight="Bold"
@@ -81,47 +133,47 @@
 
         <Button x:Name="FiveBtn" 
             Content="5" 
-            Grid.Row="4" 
+            Grid.Row="5" 
             Grid.Column="1"
             FontSize="25"
             FontWeight="Bold"
             Click="NumBtn_Click"/>
 
         <Button x:Name="SixBtn" 
-         Content="6" 
-         Grid.Row="4" 
-         Grid.Column="2"
-         FontSize="25"
-         FontWeight="Bold"
-         Click="NumBtn_Click"/>
+             Content="6" 
+             Grid.Row="5" 
+             Grid.Column="2"
+             FontSize="25"
+             FontWeight="Bold"
+             Click="NumBtn_Click"/>
 
         <Button x:Name="OneBtn" 
-          Content="1" 
-          Grid.Row="5" 
-          Grid.Column="0"
-          FontSize="25"
-          FontWeight="Bold"
-          Click="NumBtn_Click"/>
+             Content="1" 
+             Grid.Row="6" 
+             Grid.Column="0"
+             FontSize="25"
+             FontWeight="Bold"
+             Click="NumBtn_Click"/>
 
         <Button x:Name="TwoBtn" 
-          Content="2" 
-          Grid.Row="5" 
-          Grid.Column="1"
-          FontSize="25"
-          FontWeight="Bold"
-          Click="NumBtn_Click"/>
+             Content="2" 
+             Grid.Row="6" 
+             Grid.Column="1"
+             FontSize="25"
+             FontWeight="Bold"
+             Click="NumBtn_Click"/>
 
         <Button x:Name="ThreeBtn" 
-          Content="3" 
-          Grid.Row="5" 
-          Grid.Column="2"
-          FontSize="25"
-          FontWeight="Bold"
-          Click="NumBtn_Click"/>
+             Content="3" 
+             Grid.Row="6" 
+             Grid.Column="2"
+             FontSize="25"
+             FontWeight="Bold"
+             Click="NumBtn_Click"/>
 
         <Button x:Name="ZeroBtn" 
            Content="0" 
-           Grid.Row="6" 
+           Grid.Row="7" 
            Grid.Column="1"
            FontSize="25"
            FontWeight="Bold"
@@ -130,7 +182,7 @@
         <!--OPERATORUL PLUS-->
         <Button x:Name="PlusBtn" 
            Content="+" 
-           Grid.Row="5" 
+           Grid.Row="6" 
            Grid.Column="3"
            FontSize="25"
            FontWeight="Bold"
@@ -141,7 +193,7 @@
 
         <Button x:Name="MinusBtn" 
            Content="-" 
-           Grid.Row="4" 
+           Grid.Row="5" 
            Grid.Column="3"
            FontSize="25"
            FontWeight="Bold"
@@ -150,7 +202,7 @@
         <!--OPERATORUL INMULTIT-->
         <Button x:Name="TimesBtn" 
            Content="x" 
-           Grid.Row="3" 
+           Grid.Row="4" 
            Grid.Column="3"
            FontSize="25"
            FontWeight="Bold"
@@ -160,7 +212,7 @@
         <!--OPERATORUL IMPARTIRE-->
         <Button x:Name="DivideBtn" 
            Content="" 
-           Grid.Row="2" 
+           Grid.Row="3" 
            Grid.Column="3"
            FontSize="25"
            FontWeight="Bold"
@@ -169,66 +221,66 @@
         <!--OPERATORUL EGAL -->
         <Button x:Name="EqualsBtn" 
              Content="=" 
-             Grid.Row="5" 
+             Grid.Row="6" 
              Grid.Column="3"
              FontSize="25"
              FontWeight="Bold"
              Click="EqualsBtn_Click" Margin="0,45,0,0" Grid.RowSpan="2"/>
 
         <Button x:Name="InvertBtn" 
-Content="1/x" 
-Grid.Row="2" 
-Grid.Column="0"
-FontSize="25"
-FontWeight="Bold"
-Click="InvertBtn_Click"/>
+            Content="1/x" 
+            Grid.Row="3" 
+            Grid.Column="0"
+            FontSize="25"
+            FontWeight="Bold"
+            Click="InvertBtn_Click"/>
 
         <Button x:Name="Squared_twoBtn" 
-Content="x²" 
-Grid.Row="2"
-FontSize="25"
-FontWeight="Bold"
-Click="SquaredBtn_Click" Grid.ColumnSpan="2" Height="45" Margin="82,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top"/>
+            Content="x²" 
+            Grid.Row="3"
+            FontSize="25"
+            FontWeight="Bold"
+            Click="SquaredBtn_Click" Height="45" VerticalAlignment="Center" Grid.Column="1"/>
 
 
         <Button x:Name="SqrtBtn" 
-Content="√"
-Grid.Row ="2" 
-Grid.Column="2"
-FontSize="25"
-FontWeight="Bold"
-Click="SqrtBtn_Click"/>
+            Content="√"
+            Grid.Row ="3" 
+            Grid.Column="2"
+            FontSize="25"
+            FontWeight="Bold"
+            Click="SqrtBtn_Click"/>
 
         <Button x:Name="PrecentBtn" 
-Content="%"
-Grid.Row ="1" 
-Grid.Column="0"
-FontSize="25"
-FontWeight="Bold"
-Click="PrecentBtn_Click" Height="45" Grid.RowSpan="2" VerticalAlignment="Top"/>
+            Content="%"
+            Grid.Row ="2" 
+            Grid.Column="0"
+            FontSize="25"
+            FontWeight="Bold"
+            Click="PrecentBtn_Click" Height="45" VerticalAlignment="Center"/>
 
         <Button x:Name="ClearEntryBtn" 
-Content="CE"
-Grid.Row ="1" 
-Grid.Column="1"
-FontSize="25"
-FontWeight="Bold"
-Click="ClearEntryBtn_Click"/>
+            Content="CE"
+            Grid.Row ="2" 
+            Grid.Column="1"
+            FontSize="25"
+            FontWeight="Bold"
+            Click="ClearEntryBtn_Click"/>
 
         <Button x:Name="ClearBtn" 
-Content="C"
-Grid.Row ="1" 
-Grid.Column="2"
-FontSize="25"
-FontWeight="Bold"
-Click="ClearBtn_Click" Grid.ColumnSpan="2" Height="45" Margin="0,0,82,0" Grid.RowSpan="2" VerticalAlignment="Top"/>
+            Content="C"
+            Grid.Row ="2" 
+            Grid.Column="2"
+            FontSize="25"
+            FontWeight="Bold"
+            Click="ClearBtn_Click" Height="45" VerticalAlignment="Center"/>
         <Button x:Name="NegateBtn" 
-Content="+/-"
-Grid.Row ="6" 
-Grid.Column="0"
-FontSize="25"
-FontWeight="Bold"
-Click="NegateBtn_Click"/>
+            Content="+/-"
+            Grid.Row ="7" 
+            Grid.Column="0"
+            FontSize="25"
+            FontWeight="Bold"
+            Click="NegateBtn_Click"/>
 
 
 

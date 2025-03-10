@@ -15,20 +15,20 @@ using System.Windows.Shapes;
 namespace calculator
 {
     /// <summary>
-    /// Interaction logic for StandardMode.xaml
+    /// Interaction logic for Memory.xaml
     /// </summary>
-    public partial class StandardMode : Window
+    public partial class Memory : Window
     {
-        public StandardMode()
+
+        public Memory(object dataContext)
         {
+            DataContext = dataContext;
             InitializeComponent();
         }
 
-        private void NumBtn_Click(object sender, RoutedEventArgs e)
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            string name = ((Button)sender).Name;
-            MessageBox.Show(name);
+            //(DataContext as MemoryListNumber).SelectedNumber = (sender as ListBox).SelectedItem as MemoryNumber;
         }
     }
 }

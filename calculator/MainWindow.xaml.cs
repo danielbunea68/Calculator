@@ -21,9 +21,10 @@ namespace calculator
     {
         double TempValue = 0;
         private string Operation { get; set; } = string.Empty;
-        
+
         private string output = string.Empty;
-        public string Output { 
+        public string Output
+        {
             get
             {
                 return output;
@@ -36,11 +37,29 @@ namespace calculator
             }
         }
 
+
+
+        private string memoryValue = "0";
+        private MemoryList memoryList;
+
+        public string MemoryValue
+        {
+            get { return memoryValue; }
+            set { memoryValue = value; OnPropertyChanged(nameof(MemoryValue)); }
+        }
+
+
+        public MemoryList MemoryList { get => memoryList; set => memoryList = value; }
+
+
+
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = this;
 
+            MemoryList = new MemoryList(); // Inițializăm obiectul
+            DataContext = this;
+            this.KeyDown += new KeyEventHandler(OnKeyDown);
             DivideBtn.Content = "\u00F7";
         }
 
@@ -51,6 +70,52 @@ namespace calculator
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            string keyString = new KeyConverter().ConvertToString(e.Key);
+
+            if (keyString is not null && keyString.Length == 1 && char.IsDigit(keyString[0]))
+            {
+                Output += keyString;
+                Output = FormatOutput(Output);
+                return;
+            }
+
+            if (e.Key == Key.OemPlus || e.Key == Key.Add)
+            {
+                PerformOperation("Plus");
+            }
+            else if (e.Key == Key.OemMinus || e.Key == Key.Subtract)
+            {
+                PerformOperation("Minus");
+            }
+            else if (e.Key == Key.Oem2 || e.Key == Key.Divide)
+            {
+                PerformOperation("Divide");
+            }
+            else if (e.Key == Key.Multiply || e.Key == Key.Oem8)
+            {
+                PerformOperation("Times");
+            }
+
+            switch (e.Key)
+            {
+                case Key.Return:
+                    PerformComputation();
+                    break;
+
+                case Key.Back when Output.Length > 0:
+                    Output = Output[..^1];
+                    break;
+
+                case Key.Escape:
+                    Clear();
+                    break;
+
+                default:
+                    break;
+            }
+        }
 
         private void NumBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -60,7 +125,7 @@ namespace calculator
 
         private string FormatOutput(string value)
         {
-            if (int.TryParse(value, out int number))
+            if (double.TryParse(value, out double number))
             {
                 return number.ToString("N0", CultureInfo.CurrentCulture);
             }
@@ -79,13 +144,13 @@ namespace calculator
                 TempValue = double.Parse(Output);
                 Operation = op;
                 Output = "";
-            } 
+            }
         }
         private void MinusBtn_Click(object sender, RoutedEventArgs e)
         {
             PerformOperation("Minus");
         }
-    
+
         private void PlusBtn_Click(object sender, RoutedEventArgs e)
         {
             PerformOperation("Plus");
@@ -107,6 +172,9 @@ namespace calculator
 
         private void PerformComputation()
         {
+            if (Output.Length == 0)
+                return;
+
             double outputTemp = double.Parse(Output);
             switch (Operation)
             {
@@ -128,6 +196,11 @@ namespace calculator
         }
 
         private void ClearBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Clear();
+        }
+
+        void Clear()
         {
             TempValue = 0;
             Output = "";
@@ -156,7 +229,7 @@ namespace calculator
                 Output = (1 / value).ToString();
                 TempValue = double.Parse(Output);
             }
-                
+
         }
 
         private void SquaredBtn_Click(object sender, RoutedEventArgs e)
@@ -166,7 +239,7 @@ namespace calculator
                 Output = (value * value).ToString();
                 TempValue = double.Parse(Output);
             }
-                
+
         }
 
         private void SqrtBtn_Click(object sender, RoutedEventArgs e)
@@ -185,6 +258,46 @@ namespace calculator
                 Output = (-value).ToString();
                 TempValue = double.Parse(Output);
             }
+        }
+
+        private void MemoryRecallBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Output = MemoryList.PeekNumber()?.MemoryValue ?? "0";
+        }
+
+        private void MemoryClearBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MemoryList.Numbers.Clear();
+        }
+
+        private void MemoryAddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (double.TryParse(Output, out double value))
+            {
+                MemoryList.AddNumber(value);
+            }
+        }
+
+        private void MemorySubstractBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (double.TryParse(Output, out double value))
+            {
+                MemoryList.SubtractNumber(value);
+            }
+        }
+
+        private void MemoryStoreBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (double.TryParse(Output, out double value))
+            {
+                MemoryList.PushNumber(new MemoryNumber(value.ToString()));
+            }
+        }
+
+        private void MemoryShowBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Memory _memory = new(this.DataContext);
+            _memory.ShowDialog();
         }
     }
 }
