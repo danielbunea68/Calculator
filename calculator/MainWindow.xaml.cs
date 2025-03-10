@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.ComponentModel;
+using System.Globalization;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,80 +10,76 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace calculator
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        double temp = 0;
+        double TempValue = 0;
+        private string Operation { get; set; } = string.Empty;
+        
+        private string output = string.Empty;
+        public string Output { 
+            get
+            {
+                return output;
+            }
 
-        string operation = "";
-        string output = "";
+            set
+            {
+                output = value;
+                OnPropertyChanged(nameof(Output));
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = this;
+            DataContext = this;
+
             DivideBtn.Content = "\u00F7";
         }
 
-       
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
 
         private void NumBtn_Click(object sender, RoutedEventArgs e)
         {
-            string name = ((Button)sender).Name;
-            switch (name)
-            {
-                case "OneBtn":
-                    output += "1";
-                    OutputTextBlock.Text = output;
-                    break;
-                case "TwoBtn":
-                    output += "2";
-                    OutputTextBlock.Text = output;
-                    break;
-                case "ThreeBtn":
-                    output += "3";
-                    OutputTextBlock.Text = output;
-                    break;
-                case "FourBtn":
-                    output += "4";
-                    OutputTextBlock.Text = output;
-                    break;
-                case "FiveBtn":
-                    output += "5";
-                    OutputTextBlock.Text = output;
-                    break;
-                case "SixBtn":
-                    output += "6";
-                    OutputTextBlock.Text = output;
-                    break;
-                case "SevenBtn":
-                    output += "7";
-                    OutputTextBlock.Text = output;
-                    break;
-                case "EightBtn":
-                    output += "8";
-                    OutputTextBlock.Text = output;
-                    break;
-                case "NineBtn":
-                    output += "9";
-                    OutputTextBlock.Text = output;
-                    break;
-
-            }
+            Output += ((Button)sender).Content.ToString();
+            Output = FormatOutput(Output);
         }
+
+        private string FormatOutput(string value)
+        {
+            if (int.TryParse(value, out int number))
+            {
+                return number.ToString("N0", CultureInfo.CurrentCulture);
+            }
+            return string.Empty;
+        }
+
 
         private void PerformOperation(string op)
         {
-            if (!string.IsNullOrEmpty(output))
+            if (!string.IsNullOrEmpty(Output))
             {
-                temp = double.Parse(output);
-                output = "";
-                operation = op;
-            }
+                if (!string.IsNullOrEmpty(Operation))
+                {
+                    PerformComputation();
+                }
+                TempValue = double.Parse(Output);
+                Operation = op;
+                Output = "";
+            } 
         }
         private void MinusBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -91,7 +89,6 @@ namespace calculator
         private void PlusBtn_Click(object sender, RoutedEventArgs e)
         {
             PerformOperation("Plus");
-
         }
 
         private void TimesBtn_Click(object sender, RoutedEventArgs e)
@@ -105,38 +102,89 @@ namespace calculator
         }
         private void EqualsBtn_Click(object sender, RoutedEventArgs e)
         {
-            double outputTemp = double.Parse(output);
-            switch (operation)
+            PerformComputation();
+        }
+
+        private void PerformComputation()
+        {
+            double outputTemp = double.Parse(Output);
+            switch (Operation)
             {
                 case "Plus":
-                    output = (temp + outputTemp).ToString();
+                    Output = (TempValue + outputTemp).ToString();
                     break;
                 case "Minus":
-                    output = (temp - outputTemp).ToString();
+                    Output = (TempValue - outputTemp).ToString();
                     break;
                 case "Times":
-                    output = (temp * outputTemp).ToString();
+                    Output = (TempValue * outputTemp).ToString();
                     break;
                 case "Divide":
-                    output = outputTemp != 0 ? (temp / outputTemp).ToString() : "Error";
+                    Output = outputTemp != 0 ? (TempValue / outputTemp).ToString() : "Error";
                     break;
             }
-            OutputTextBlock.Text = output;
-            operation = "";
+            Output = FormatOutput(Output);
+            Operation = "";
         }
 
         private void ClearBtn_Click(object sender, RoutedEventArgs e)
         {
-            temp = 0;
-            output = "";
-            operation = "";
-            OutputTextBlock.Text = "0";
+            TempValue = 0;
+            Output = "";
+            Operation = "";
         }
 
         private void ClearEntryBtn_Click(object sender, RoutedEventArgs e)
         {
-            output = "";
-            OutputTextBlock.Text = "0";
+            Output = "";
+        }
+
+        private void PrecentBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (double.TryParse(Output, out double value))
+            {
+                Output = (value / 100).ToString();
+                TempValue = double.Parse(Output);
+            }
+        }
+
+        private void InvertBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (double.TryParse(Output, out double value) && value != 0)
+            {
+                Output = (1 / value).ToString();
+                TempValue = double.Parse(Output);
+            }
+                
+        }
+
+        private void SquaredBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (double.TryParse(Output, out double value))
+            {
+                Output = (value * value).ToString();
+                TempValue = double.Parse(Output);
+            }
+                
+        }
+
+        private void SqrtBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (double.TryParse(Output, out double value) && value >= 0)
+            {
+                Output = Math.Sqrt(value).ToString();
+                TempValue = double.Parse(Output);
+            }
+        }
+
+        private void NegateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (double.TryParse(Output, out double value))
+            {
+                Output = (-value).ToString();
+                TempValue = double.Parse(Output);
+            }
         }
     }
 }

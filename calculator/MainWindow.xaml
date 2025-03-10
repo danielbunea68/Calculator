@@ -43,7 +43,7 @@
             Grid.Column="0" 
             Grid.ColumnSpan="4"
             VerticalAlignment="Bottom"
-            Text=""
+            Text="{Binding Output, UpdateSourceTrigger=PropertyChanged}"
             FontSize="50"
             TextAlignment="Right"/>
 
@@ -173,40 +173,39 @@
              Grid.Column="3"
              FontSize="25"
              FontWeight="Bold"
-             Click="EqualsBtn_Click" Margin="0,45,0,0" Grid.RowSpan="2"/>   
+             Click="EqualsBtn_Click" Margin="0,45,0,0" Grid.RowSpan="2"/>
 
-        <Button x:Name="FracBtn" 
+        <Button x:Name="InvertBtn" 
 Content="1/x" 
 Grid.Row="2" 
 Grid.Column="0"
 FontSize="25"
 FontWeight="Bold"
-Click="NumBtn_Click"/>
+Click="InvertBtn_Click"/>
 
-        <Button x:Name="Power_twoBtn" 
+        <Button x:Name="Squared_twoBtn" 
 Content="x²" 
-Grid.Row="2" 
-Grid.Column="1"
+Grid.Row="2"
 FontSize="25"
 FontWeight="Bold"
-Click="NumBtn_Click"/>
+Click="SquaredBtn_Click" Grid.ColumnSpan="2" Height="45" Margin="82,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top"/>
 
 
-        <Button x:Name="Sqrt2Btn" 
+        <Button x:Name="SqrtBtn" 
 Content="√"
 Grid.Row ="2" 
 Grid.Column="2"
 FontSize="25"
 FontWeight="Bold"
-Click="NumBtn_Click"/>
+Click="SqrtBtn_Click"/>
 
-        <Button x:Name="Modulo2Btn" 
+        <Button x:Name="PrecentBtn" 
 Content="%"
 Grid.Row ="1" 
 Grid.Column="0"
 FontSize="25"
 FontWeight="Bold"
-Click="NumBtn_Click"/>
+Click="PrecentBtn_Click" Height="45" Grid.RowSpan="2" VerticalAlignment="Top"/>
 
         <Button x:Name="ClearEntryBtn" 
 Content="CE"
@@ -223,13 +222,13 @@ Grid.Column="2"
 FontSize="25"
 FontWeight="Bold"
 Click="ClearBtn_Click" Grid.ColumnSpan="2" Height="45" Margin="0,0,82,0" Grid.RowSpan="2" VerticalAlignment="Top"/>
-        <Button x:Name="PlusMinus2Btn" 
+        <Button x:Name="NegateBtn" 
 Content="+/-"
 Grid.Row ="6" 
 Grid.Column="0"
 FontSize="25"
 FontWeight="Bold"
-Click="NumBtn_Click"/>
+Click="NegateBtn_Click"/>
 
 
 
