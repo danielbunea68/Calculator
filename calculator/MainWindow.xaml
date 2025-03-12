@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:calculator"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="350">
-
+    <Window.DataContext>
+        <local:Calculator/>
+    </Window.DataContext>
 
     <Grid Margin="10" RenderTransformOrigin="0.5,0.5">
         <Grid.RowDefinitions>
@@ -214,7 +216,7 @@
            Grid.Column="3"
            FontSize="25"
            FontWeight="Bold"
-           Click="PlusBtn_Click"/>
+           Click="OperationBtn_Click"/>
 
 
         <!--OPERATORUL MINUS-->
@@ -225,7 +227,7 @@
            Grid.Column="3"
            FontSize="25"
            FontWeight="Bold"
-           Click="MinusBtn_Click"/>
+           Click="OperationBtn_Click"/>
 
         <!--OPERATORUL INMULTIT-->
         <Button x:Name="TimesBtn" 
@@ -234,7 +236,7 @@
            Grid.Column="3"
            FontSize="25"
            FontWeight="Bold"
-           Click="TimesBtn_Click"/>
+           Click="OperationBtn_Click"/>
 
 
         <!--OPERATORUL IMPARTIRE-->
@@ -244,7 +246,7 @@
            Grid.Column="3"
            FontSize="25"
            FontWeight="Bold"
-           Click="DivideBtn_Click"/>
+           Click="OperationBtn_Click"/>
 
         <!--OPERATORUL EGAL -->
         <Button x:Name="EqualsBtn" 
@@ -302,6 +304,7 @@
             FontSize="25"
             FontWeight="Bold"
             Click="ClearBtn_Click"/>
+        
         <Button x:Name="NegateBtn" 
             Content="+/-"
             Grid.Row ="8" 
