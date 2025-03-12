@@ -20,6 +20,7 @@ namespace calculator
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         double TempValue = 0;
+        int temval = 0; 
         private string Operation { get; set; } = string.Empty;
 
         private string output = string.Empty;
@@ -34,8 +35,18 @@ namespace calculator
             {
                 output = value;
                 OnPropertyChanged(nameof(Output));
+                OnPropertyChanged(nameof(Output));
+                OnPropertyChanged(nameof(HexValue));
+                OnPropertyChanged(nameof(DecValue));
+                OnPropertyChanged(nameof(OctValue));
+                OnPropertyChanged(nameof(BinValue));
             }
         }
+
+        public string HexValue => ConvertToHex(Output);
+        public string DecValue => ConvertToDecimal(Output);
+        public string OctValue => ConvertToOctal(Output);
+        public string BinValue => ConvertToBinary(Output);
 
 
 
@@ -69,7 +80,56 @@ namespace calculator
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        private string ConvertToHex(string value)
+        {
+            string cleanedValue = value.Replace(",", "");
 
+            // Verificăm dacă valoarea este validă
+            if (long.TryParse(cleanedValue, out long num))
+            {
+                return num.ToString("X"); // conversia în hex
+            }
+            return "Invalid Input";
+        }
+
+        // Conversia la Decimal
+        private string ConvertToDecimal(string value)
+        {
+            string cleanedValue = value.Replace(",", "");
+
+            // Verificăm dacă valoarea este validă
+            if (long.TryParse(cleanedValue, out long num))
+            {
+                return num.ToString(); // conversia în decimal
+            }
+            return "Invalid Input";
+        }
+
+        // Conversia la Octal
+        private string ConvertToOctal(string value)
+        {
+            string cleanedValue = value.Replace(",", "");
+
+            // Verificăm dacă valoarea este validă
+            if (long.TryParse(cleanedValue, out long num))
+            {
+                return Convert.ToString(num, 8); // conversia în octal
+            }
+            return "Invalid Input";
+        }
+
+        // Conversia la Binare
+        private string ConvertToBinary(string value)
+        {
+            string cleanedValue = value.Replace(",", "");
+
+            // Verificăm dacă valoarea este validă
+            if (long.TryParse(cleanedValue, out long num))
+            {
+                return Convert.ToString(num, 2); // conversia în binar
+            }
+            return "Invalid Input";
+        }
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             string keyString = new KeyConverter().ConvertToString(e.Key);
@@ -299,5 +359,7 @@ namespace calculator
             Memory _memory = new(this.DataContext);
             _memory.ShowDialog();
         }
+
+
     }
 }
