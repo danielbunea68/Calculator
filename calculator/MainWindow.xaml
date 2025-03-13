@@ -43,12 +43,12 @@
 
         <TextBlock Margin="5"
             x:Name="OutputTextBlock"
-            Grid.Row="0" 
+            Grid.Row="1" 
             Grid.Column="0" 
             Grid.ColumnSpan="4"
             VerticalAlignment="Bottom"
             Text="{Binding Output, UpdateSourceTrigger=PropertyChanged}"
-            FontSize="50"
+            FontSize="25"
             TextAlignment="Right"/>
         <StackPanel x:Name="Baze" Grid.ColumnSpan="4">
             <!-- HEX Row -->
@@ -312,8 +312,55 @@
             FontSize="25"
             FontWeight="Bold"
             Click="NegateBtn_Click"/>
+        
+        <Button x:Name="ABtn" 
+      Content="A"
+      Grid.Row ="3" 
+      Grid.Column="4"
+      FontSize="25"
+      FontWeight="Bold"
+      Click="NumBtn_Click"/>
+        
+        
+        <Button x:Name="BBtn" 
+ Content="B"
+ Grid.Row ="4" 
+ Grid.Column="4"
+ FontSize="25"
+ FontWeight="Bold"
+ Click="NumBtn_Click"/>
+
+        <Button x:Name="CBtn" 
+ Content="C"
+ Grid.Row ="5" 
+ Grid.Column="4"
+ FontSize="25"
+ FontWeight="Bold"
+ Click="NumBtn_Click"/>
+        <Button x:Name="DBtn" 
+ Content="D"
+ Grid.Row ="6" 
+ Grid.Column="4"
+ FontSize="25"
+ FontWeight="Bold"
+ Click="NumBtn_Click"/>
+
+        <Button x:Name="EBtn" 
+ Content="E"
+ Grid.Row ="7" 
+ Grid.Column="4"
+ FontSize="25"
+ FontWeight="Bold"
+ Click="NumBtn_Click"/>
 
 
+        <Button x:Name="FBtn" 
+Content="F"
+Grid.Row ="8" 
+Grid.Column="4"
+FontSize="25"
+FontWeight="Bold"
+Click="NumBtn_Click"/>
 
     </Grid>
 </Window>
