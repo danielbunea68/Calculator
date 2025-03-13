@@ -84,6 +84,21 @@ namespace calculator
             Memory _memory = new(calculator);
             _memory.ShowDialog();
         }
+
+        private void ModeSwitchBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OpenStandardMode(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OpenProgrammerMode(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 

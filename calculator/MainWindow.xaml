@@ -13,6 +13,7 @@
     <Grid Margin="10" RenderTransformOrigin="0.5,0.5">
         <Grid.RowDefinitions>
             <!--These is for output-->
+            
             <RowDefinition Height="100"/>
 
             <!--These are for the numbers-->
@@ -25,11 +26,6 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
 
-
-
-
-
-
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -40,6 +36,14 @@
             <ColumnDefinition Width="*"/>
 
         </Grid.ColumnDefinitions>
+
+        <Menu VerticalAlignment="Top" Grid.Row="0" 
+Grid.Column="5" >
+            <MenuItem Header="">
+                <MenuItem Header="Standard" Click="OpenStandardMode"/>
+                <MenuItem Header="Programmer" Click="OpenProgrammerMode"/>
+            </MenuItem>
+        </Menu>
 
         <TextBlock Margin="5"
             x:Name="OutputTextBlock"
