@@ -1,22 +1,33 @@
-﻿using System.ComponentModel;
-using System.Globalization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace calculator
 {
-    public partial class MainWindow : Window
+    /// <summary>
+    /// Interaction logic for Programer.xaml
+    /// </summary>
+    public partial class Programer : Window
     {
         private Calculator calculator;
-
-        public MainWindow()
+        public Programer()
         {
             InitializeComponent();
             calculator = new Calculator();
             DataContext = calculator; // Legăm clasa Calculator la UI
             this.KeyDown += OnKeyDown;
         }
+
 
         private void NumBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -85,11 +96,10 @@ namespace calculator
             _memory.ShowDialog();
         }
 
-
         private void OpenStandardMode(object sender, RoutedEventArgs e)
         {
-            //MainWindow standardWind = new();
-            ///standardWind.ShowDialog();
+            MainWindow standardWind = new();
+            standardWind.ShowDialog();
         }
 
         private void OpenProgrammerMode(object sender, RoutedEventArgs e)
@@ -99,8 +109,3 @@ namespace calculator
         }
     }
 }
-
-
-
-
-

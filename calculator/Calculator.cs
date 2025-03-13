@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 
@@ -57,6 +58,13 @@ namespace calculator
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private void FormatOutput()
+        {
+            if (double.TryParse(Output, out double number))
+            {
+                Output = number.ToString("N0", CultureInfo.CurrentCulture);
+            }
+        }
 
         public string ConvertToHex(string value)
         {
@@ -117,11 +125,13 @@ namespace calculator
             if (isNewEntry || Output == "0")
             {
                 Output = number;
+
             }
             else
             {
                 Output += number;
             }
+            FormatOutput();
             isNewEntry = false;
         }
 

@@ -1,4 +1,4 @@
-﻿<Window x:Class="calculator.MainWindow"
+﻿<Window x:Class="calculator.Programer"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -13,7 +13,7 @@
     <Grid Margin="10" RenderTransformOrigin="0.5,0.5">
         <Grid.RowDefinitions>
             <!--These is for output-->
-            
+
             <RowDefinition Height="100"/>
 
             <!--These are for the numbers-->
@@ -38,7 +38,7 @@
         </Grid.ColumnDefinitions>
 
         <Menu VerticalAlignment="Top" Grid.Row="0" Grid.Column="4" >
-                                                        
+
             <MenuItem Header="Meniu">
                 <MenuItem Header="Standard" Click="OpenStandardMode"/>
                 <MenuItem Header="Programmer" Click="OpenProgrammerMode"/>
@@ -54,7 +54,32 @@
             Text="{Binding Output, UpdateSourceTrigger=PropertyChanged}"
             FontSize="25"
             TextAlignment="Right"/>
-       
+        <StackPanel x:Name="Baze" Grid.ColumnSpan="4">
+            <!-- HEX Row -->
+            <StackPanel Orientation="Horizontal">
+                <Label Content="HEX" VerticalAlignment="Center" Width="50"/>
+                <TextBlock x:Name="HexTextBlock" VerticalAlignment="Center"
+                           Text="{Binding HexValue, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <!-- DEX Row -->
+            <StackPanel Orientation="Horizontal">
+                <Label Content="DEX" VerticalAlignment="Center" Width="50"/>
+                <TextBlock x:Name="DexTextBlock" VerticalAlignment="Center" Text="{Binding DecValue, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <!-- OCT Row -->
+            <StackPanel Orientation="Horizontal">
+                <Label Content="OCT" VerticalAlignment="Center" Width="50"/>
+                <TextBlock x:Name="OctTextBlock" VerticalAlignment="Center" Text="{Binding OctValue, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <!-- BIN Row -->
+            <StackPanel Orientation="Horizontal">
+                <Label Content="BIN" VerticalAlignment="Center" Width="50"/>
+                <TextBlock x:Name="BinTextBlock" VerticalAlignment="Center" Text="{Binding BinValue, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </StackPanel>
 
 
         <Button x:Name="MemoryBtn" 
@@ -283,7 +308,7 @@
             FontSize="25"
             FontWeight="Bold"
             Click="ClearBtn_Click"/>
-        
+
         <Button x:Name="NegateBtn" 
             Content="+/-"
             Grid.Row ="8" 
@@ -291,8 +316,55 @@
             FontSize="25"
             FontWeight="Bold"
             Click="NegateBtn_Click"/>
-        
- 
+
+        <Button x:Name="ABtn" 
+      Content="A"
+      Grid.Row ="3" 
+      Grid.Column="4"
+      FontSize="25"
+      FontWeight="Bold"
+      Click="NumBtn_Click"/>
+
+
+        <Button x:Name="BBtn" 
+ Content="B"
+ Grid.Row ="4" 
+ Grid.Column="4"
+ FontSize="25"
+ FontWeight="Bold"
+ Click="NumBtn_Click"/>
+
+        <Button x:Name="CBtn" 
+ Content="C"
+ Grid.Row ="5" 
+ Grid.Column="4"
+ FontSize="25"
+ FontWeight="Bold"
+ Click="NumBtn_Click"/>
+        <Button x:Name="DBtn" 
+ Content="D"
+ Grid.Row ="6" 
+ Grid.Column="4"
+ FontSize="25"
+ FontWeight="Bold"
+ Click="NumBtn_Click"/>
+
+        <Button x:Name="EBtn" 
+ Content="E"
+ Grid.Row ="7" 
+ Grid.Column="4"
+ FontSize="25"
+ FontWeight="Bold"
+ Click="NumBtn_Click"/>
+
+
+        <Button x:Name="FBtn" 
+Content="F"
+Grid.Row ="8" 
+Grid.Column="4"
+FontSize="25"
+FontWeight="Bold"
+Click="NumBtn_Click"/>
 
     </Grid>
 </Window>
