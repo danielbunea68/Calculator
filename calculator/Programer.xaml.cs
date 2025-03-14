@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -79,6 +80,11 @@ namespace calculator
             calculator.Negate();
         }
 
+        private void BackspaceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            calculator.Backspace();
+        }
+
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             calculator.HandleKeyPress(e);
@@ -107,5 +113,33 @@ namespace calculator
             Programer programerWind = new();
             programerWind.ShowDialog();
         }
+
+        private void BaseRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton selectedButton = sender as RadioButton;
+
+            if (selectedButton != null)
+            {
+                // Setăm baza în calculator
+                if (selectedButton == HexRadioButton)
+                {
+                    calculator.SetBase(16); // Baza hexazecimală
+                }
+                else if (selectedButton == DecRadioButton)
+                {
+                    calculator.SetBase(10); // Baza decimală
+                }
+                else if (selectedButton == OctRadioButton)
+                {
+                    calculator.SetBase(8); // Baza octală
+                }
+                else if (selectedButton == BinRadioButton)
+                {
+                    calculator.SetBase(2); // Baza binară
+                }
+            }
+        }
     }
+
+
 }

@@ -54,30 +54,63 @@
             Text="{Binding Output, UpdateSourceTrigger=PropertyChanged}"
             FontSize="25"
             TextAlignment="Right"/>
-        <StackPanel x:Name="Baze" Grid.ColumnSpan="4">
-            <!-- HEX Row -->
+        <!--<StackPanel x:Name="Baze" Grid.ColumnSpan="4">
+            --><!-- HEX Row --><!--
             <StackPanel Orientation="Horizontal">
                 <Label Content="HEX" VerticalAlignment="Center" Width="50"/>
                 <TextBlock x:Name="HexTextBlock" VerticalAlignment="Center"
                            Text="{Binding HexValue, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
-            <!-- DEX Row -->
+            --><!-- DEX Row --><!--
             <StackPanel Orientation="Horizontal">
                 <Label Content="DEX" VerticalAlignment="Center" Width="50"/>
                 <TextBlock x:Name="DexTextBlock" VerticalAlignment="Center" Text="{Binding DecValue, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
-            <!-- OCT Row -->
+            --><!-- OCT Row --><!--
             <StackPanel Orientation="Horizontal">
                 <Label Content="OCT" VerticalAlignment="Center" Width="50"/>
                 <TextBlock x:Name="OctTextBlock" VerticalAlignment="Center" Text="{Binding OctValue, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
-            <!-- BIN Row -->
+            --><!-- BIN Row --><!--
             <StackPanel Orientation="Horizontal">
                 <Label Content="BIN" VerticalAlignment="Center" Width="50"/>
                 <TextBlock x:Name="BinTextBlock" VerticalAlignment="Center" Text="{Binding BinValue, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </StackPanel>-->
+        <StackPanel x:Name="Baze" Grid.ColumnSpan="4">
+            <!-- HEX Row -->
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <RadioButton x:Name="HexRadioButton" Content="HEX" VerticalAlignment="Center" 
+                     GroupName="NumberBase" Checked="BaseRadioButton_Checked" Margin="0,0,5,0"/>
+                <TextBlock x:Name="HexTextBlock" VerticalAlignment="Center"
+                   Text="{Binding HexValue, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <!-- DEC Row -->
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <RadioButton x:Name="DecRadioButton" Content="DEC" VerticalAlignment="Center" 
+                     GroupName="NumberBase" Checked="BaseRadioButton_Checked" Margin="0,0,5,0"/>
+                <TextBlock x:Name="DecTextBlock" VerticalAlignment="Center" 
+                   Text="{Binding DecValue, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <!-- OCT Row -->
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <RadioButton x:Name="OctRadioButton" Content="OCT" VerticalAlignment="Center" 
+                     GroupName="NumberBase" Checked="BaseRadioButton_Checked" Margin="0,0,5,0"/>
+                <TextBlock x:Name="OctTextBlock" VerticalAlignment="Center" 
+                   Text="{Binding OctValue, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <!-- BIN Row -->
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <RadioButton x:Name="BinRadioButton" Content="BIN" VerticalAlignment="Center" 
+                     GroupName="NumberBase" Checked="BaseRadioButton_Checked" Margin="0,0,5,0"/>
+                <TextBlock x:Name="BinTextBlock" VerticalAlignment="Center" 
+                   Text="{Binding BinValue, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </StackPanel>
 
@@ -365,6 +398,15 @@ Grid.Column="4"
 FontSize="25"
 FontWeight="Bold"
 Click="NumBtn_Click"/>
+
+
+        <Button x:Name="BackspaceBtn" 
+        Content="Backspace" 
+        Grid.Row="8" 
+        Grid.Column="2" 
+        FontSize="10" 
+        FontWeight="Bold" 
+        Click="BackspaceBtn_Click"/>
 
     </Grid>
 </Window>

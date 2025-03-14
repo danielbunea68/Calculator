@@ -68,6 +68,7 @@ namespace calculator
             calculator.Negate();
         }
 
+
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             calculator.HandleKeyPress(e);
@@ -96,6 +97,11 @@ namespace calculator
         {
             Programer programerWind = new();
             programerWind.ShowDialog();
+        }
+
+        private void BackspaceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            calculator.Backspace();
         }
     }
 }

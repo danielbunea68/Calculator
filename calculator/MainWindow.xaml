@@ -291,8 +291,14 @@
             FontSize="25"
             FontWeight="Bold"
             Click="NegateBtn_Click"/>
-        
- 
+        <Button x:Name="BackspaceBtn" 
+  Content="Backspace" 
+  Grid.Row="8" 
+  Grid.Column="2" 
+  FontSize="10" 
+  FontWeight="Bold" 
+  Click="BackspaceBtn_Click"/>
+
 
     </Grid>
 </Window>

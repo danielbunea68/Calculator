@@ -68,6 +68,10 @@ namespace calculator
 
         public string ConvertToHex(string value)
         {
+            if (currentBase == 16)
+            {
+                return value; // Copiem output-ul
+            }
             string cleanedValue = value.Replace(",", "");
 
             // Verificăm dacă valoarea este validă
@@ -81,40 +85,111 @@ namespace calculator
         // Conversia la Decimal
         public string ConvertToDecimal(string value)
         {
+            //if (currentBase == 10)
+            //{
+            //    return value; // Copiem output-ul
+            //}
+            //string cleanedValue = value.Replace(",", "");
+
+            //// Verificăm dacă valoarea este validă
+            //if (long.TryParse(cleanedValue, out long num))
+            //{
+            //    return num.ToString(); // conversia în decimal
+            //}
+            //return "Invalid Input";
+            // Curățăm valoarea de caracterele nedorite
             string cleanedValue = value.Replace(",", "");
 
-            // Verificăm dacă valoarea este validă
-            if (long.TryParse(cleanedValue, out long num))
+            // Convertim valoarea în decimal
+            long decimalValue = 0;
+            foreach (char c in cleanedValue.ToUpper())
             {
-                return num.ToString(); // conversia în decimal
+                int digitValue = c >= '0' && c <= '9' ? c - '0' : c >= 'A' && c <= 'F' ? c - 'A' + 10 : -1;
+                if (digitValue < 0 || digitValue >= currentBase)
+                {
+                    return "Invalid Input"; // Valoare invalidă
+                }
+                decimalValue = decimalValue * currentBase + digitValue;
             }
-            return "Invalid Input";
+
+            return decimalValue.ToString();
         }
 
         // Conversia la Octal
         public string ConvertToOctal(string value)
         {
+            //if (currentBase == 8)
+            //{
+            //    return value; // Copiem output-ul
+            //}
+            //string cleanedValue = value.Replace(",", "");
+
+            //// Verificăm dacă valoarea este validă
+            //if (long.TryParse(cleanedValue, out long num))
+            //{
+            //    return Convert.ToString(num, 8); // conversia în octal
+            //}
+            //return "Invalid Input";
+            if (currentBase == 8)
+            {
+                return value; // Copiem output-ul
+            }
+
+            // Curățăm valoarea de caracterele nedorite
             string cleanedValue = value.Replace(",", "");
 
-            // Verificăm dacă valoarea este validă
-            if (long.TryParse(cleanedValue, out long num))
+            // Convertim valoarea în decimal
+            long decimalValue = 0;
+            foreach (char c in cleanedValue.ToUpper())
             {
-                return Convert.ToString(num, 8); // conversia în octal
+                int digitValue = c >= '0' && c <= '9' ? c - '0' : c >= 'A' && c <= 'F' ? c - 'A' + 10 : -1;
+                if (digitValue < 0 || digitValue >= currentBase)
+                {
+                    return "Invalid Input"; // Valoare invalidă
+                }
+                decimalValue = decimalValue * currentBase + digitValue;
             }
-            return "Invalid Input";
+
+            return Convert.ToString(decimalValue, 8);
         }
 
         // Conversia la Binare
         public string ConvertToBinary(string value)
         {
+            //if (currentBase == 2)
+            //{
+            //    return value; // Copiem output-ul
+            //}
+            //string cleanedValue = value.Replace(",", "");
+
+            //// Verificăm dacă valoarea este validă
+            //if (long.TryParse(cleanedValue, out long num))
+            //{
+            //    return Convert.ToString(num, 2); // conversia în binar
+            //}
+            //return "Invalid Input";
+            // Verificăm dacă baza curentă este BIN
+            if (currentBase == 2)
+            {
+                return value; // Copiem output-ul
+            }
+
+            // Curățăm valoarea de caracterele nedorite
             string cleanedValue = value.Replace(",", "");
 
-            // Verificăm dacă valoarea este validă
-            if (long.TryParse(cleanedValue, out long num))
+            // Convertim valoarea în decimal
+            long decimalValue = 0;
+            foreach (char c in cleanedValue.ToUpper())
             {
-                return Convert.ToString(num, 2); // conversia în binar
+                int digitValue = c >= '0' && c <= '9' ? c - '0' : c >= 'A' && c <= 'F' ? c - 'A' + 10 : -1;
+                if (digitValue < 0 || digitValue >= currentBase)
+                {
+                    return "Invalid Input"; // Valoare invalidă
+                }
+                decimalValue = decimalValue * currentBase + digitValue;
             }
-            return "Invalid Input";
+
+            return Convert.ToString(decimalValue, 2);
         }
 
 
@@ -122,17 +197,21 @@ namespace calculator
         // Adăugare cifre
         public void AppendNumber(string number)
         {
-            if (isNewEntry || Output == "0")
+            if (IsValidInBase(number, currentBase))
             {
-                Output = number;
+                if (isNewEntry || Output == "0")
+                {
+                    Output = number;
 
+                }
+                else
+                {
+                    Output += number;
+                }
+                FormatOutput();
+                isNewEntry = false;
+               
             }
-            else
-            {
-                Output += number;
-            }
-            FormatOutput();
-            isNewEntry = false;
         }
 
         // Setarea operației matematice
@@ -162,6 +241,9 @@ namespace calculator
                             Output = (firstOperand / secondOperand).ToString();
                         else
                             Output = "Eroare";
+                        break;
+                    case "%":
+                        Output = (firstOperand * (secondOperand / 100)).ToString();
                         break;
                 }
                 operation = "";
@@ -234,6 +316,21 @@ namespace calculator
                 Output = (value * value).ToString();
             }
         }
+        public void Backspace()
+        {
+            if (Output.Length > 0)
+            {
+                // Ștergem ultimul caracter din Output
+                Output = Output.Substring(0, Output.Length - 1);
+                FormatOutput();
+
+                // Dacă Output devine gol, setăm la "0"
+                if (string.IsNullOrEmpty(Output))
+                {
+                    Output = "0";
+                }
+            }
+        }
 
         // Operații pe memoria calculatorului
         public void MemoryClear() => MemoryList.Numbers.Clear();
@@ -273,6 +370,33 @@ namespace calculator
             else if (e.Key == Key.Enter) CalculateResult();
             else if (e.Key == Key.Back) ClearEntry();
             else if (e.Key == Key.Delete) Clear();
+        }
+        private int currentBase = 10; // Baza implicită
+
+        public void SetBase(int baseValue)
+        {
+            currentBase = baseValue;
+        }
+
+        public void ResetBase()
+        {
+            currentBase = 10; // Resetăm la baza decimală
+        }
+
+     
+
+        private bool IsValidInBase(string number, int baseValue)
+        {
+            // Verificăm dacă numărul este valid în baza specificată
+            foreach (char c in number)
+            {
+                int digitValue = c >= '0' && c <= '9' ? c - '0' : c >= 'A' && c <= 'F' ? c - 'A' + 10 : -1;
+                if (digitValue < 0 || digitValue >= baseValue)
+                {
+                    return false; // Invalid
+                }
+            }
+            return true; // Valid
         }
     }
 }
