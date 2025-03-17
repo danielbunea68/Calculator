@@ -13,9 +13,9 @@ namespace calculator
         private double secondOperand = 0;
         private string operation = "";
         private bool isNewEntry = true;
-       /// <summary>
-       /// private double memory = 0;
-       /// </summary>
+        /// <summary>
+        /// private double memory = 0;
+        /// </summary>
 
 
 
@@ -78,135 +78,52 @@ namespace calculator
                     Output = cleanNumber.ToString(); // Reafișează numărul fără virgule
                 }
             }
-         
+
+        }
+
+        static string TruncAfterDot(string input)
+        {
+            int index = input.IndexOf('.');
+            return index == -1 ? input : input.Substring(0, index);
+        }
+
+        static string ConvertValueToBase(string value, int currentBase, int toBase)
+        {
+            string cleanedValue = TruncAfterDot(value.Replace(",", ""));
+            int decimalValue = 0;
+            foreach (char c in cleanedValue.ToUpper())
+            {
+                int digitValue = c >= '0' && c <= '9' ? c - '0' : c >= 'A' && c <= 'F' ? c - 'A' + 10 : -1;
+                if (digitValue < 0 || digitValue >= currentBase)
+                {
+                    return "Invalid Input";
+                }
+                decimalValue = decimalValue * currentBase + digitValue;
+            }
+
+            return Convert.ToString(decimalValue, toBase);
         }
 
         public string ConvertToHex(string value)
         {
-            if (currentBase == 16)
-            {
-                return value; // Copiem output-ul
-            }
-            string cleanedValue = value.Replace(",", "");
+            return ConvertValueToBase(value, currentBase, 16).ToUpper();
 
-            // Verificăm dacă valoarea este validă
-            if (long.TryParse(cleanedValue, out long num))
-            {
-                return num.ToString("X"); // conversia în hex
-            }
-            return "Invalid Input";
         }
 
-        // Conversia la Decimal
         public string ConvertToDecimal(string value)
         {
-            //if (currentBase == 10)
-            //{
-            //    return value; // Copiem output-ul
-            //}
-            //string cleanedValue = value.Replace(",", "");
-
-            //// Verificăm dacă valoarea este validă
-            //if (long.TryParse(cleanedValue, out long num))
-            //{
-            //    return num.ToString(); // conversia în decimal
-            //}
-            //return "Invalid Input";
-            // Curățăm valoarea de caracterele nedorite
-            string cleanedValue = value.Replace(",", "");
-
-            // Convertim valoarea în decimal
-            long decimalValue = 0;
-            foreach (char c in cleanedValue.ToUpper())
-            {
-                int digitValue = c >= '0' && c <= '9' ? c - '0' : c >= 'A' && c <= 'F' ? c - 'A' + 10 : -1;
-                if (digitValue < 0 || digitValue >= currentBase)
-                {
-                    return "Invalid Input"; // Valoare invalidă
-                }
-                decimalValue = decimalValue * currentBase + digitValue;
-            }
-
-            return decimalValue.ToString();
+            return ConvertValueToBase(value, currentBase, 10);
         }
 
-        // Conversia la Octal
         public string ConvertToOctal(string value)
         {
-            //if (currentBase == 8)
-            //{
-            //    return value; // Copiem output-ul
-            //}
-            //string cleanedValue = value.Replace(",", "");
-
-            //// Verificăm dacă valoarea este validă
-            //if (long.TryParse(cleanedValue, out long num))
-            //{
-            //    return Convert.ToString(num, 8); // conversia în octal
-            //}
-            //return "Invalid Input";
-            if (currentBase == 8)
-            {
-                return value; // Copiem output-ul
-            }
-
-            // Curățăm valoarea de caracterele nedorite
-            string cleanedValue = value.Replace(",", "");
-
-            // Convertim valoarea în decimal
-            long decimalValue = 0;
-            foreach (char c in cleanedValue.ToUpper())
-            {
-                int digitValue = c >= '0' && c <= '9' ? c - '0' : c >= 'A' && c <= 'F' ? c - 'A' + 10 : -1;
-                if (digitValue < 0 || digitValue >= currentBase)
-                {
-                    return "Invalid Input"; // Valoare invalidă
-                }
-                decimalValue = decimalValue * currentBase + digitValue;
-            }
-
-            return Convert.ToString(decimalValue, 8);
+            return ConvertValueToBase(value, currentBase, 8);
         }
 
-        // Conversia la Binare
         public string ConvertToBinary(string value)
         {
-            //if (currentBase == 2)
-            //{
-            //    return value; // Copiem output-ul
-            //}
-            //string cleanedValue = value.Replace(",", "");
-
-            //// Verificăm dacă valoarea este validă
-            //if (long.TryParse(cleanedValue, out long num))
-            //{
-            //    return Convert.ToString(num, 2); // conversia în binar
-            //}
-            //return "Invalid Input";
-            // Verificăm dacă baza curentă este BIN
-            if (currentBase == 2)
-            {
-                return value; // Copiem output-ul
-            }
-
-            // Curățăm valoarea de caracterele nedorite
-            string cleanedValue = value.Replace(",", "");
-
-            // Convertim valoarea în decimal
-            long decimalValue = 0;
-            foreach (char c in cleanedValue.ToUpper())
-            {
-                int digitValue = c >= '0' && c <= '9' ? c - '0' : c >= 'A' && c <= 'F' ? c - 'A' + 10 : -1;
-                if (digitValue < 0 || digitValue >= currentBase)
-                {
-                    return "Invalid Input"; // Valoare invalidă
-                }
-                decimalValue = decimalValue * currentBase + digitValue;
-            }
-
-            return Convert.ToString(decimalValue, 2);
+            return ConvertValueToBase(value, currentBase, 2);
         }
-
 
 
         // Adăugare cifre
@@ -225,7 +142,7 @@ namespace calculator
                 }
                 FormatOutput();
                 isNewEntry = false;
-               
+
             }
         }
 
@@ -238,7 +155,7 @@ namespace calculator
                 {
                     CalculateResult();
                 }
-                
+
                 firstOperand = double.Parse(Output);
                 isNewEntry = true;
                 operation = op;
@@ -301,7 +218,7 @@ namespace calculator
             if (double.TryParse(Output, out double value) && value != 0)
             {
                 Output = (1 / value).ToString();
-                
+
             }
 
         }
@@ -354,23 +271,25 @@ namespace calculator
 
         // Operații pe memoria calculatorului
         public void MemoryClear() => MemoryList.Numbers.Clear();
-        public void MemoryRecall() => Output = MemoryList.PeekNumber()?.MemoryValue ?? "0";
+        public void MemoryRecall() => Output = ConvertValueToBase(MemoryList.PeekNumber()?.MemoryValue ?? "0", MemoryList.PeekNumber()?.MemoryBase ?? 10, currentBase);
         public void MemoryAdd()
         {
+            // AddNumber si Subtract number trebuie sa accepte (string value, int valueBase)
+            // Convert to support base operations
             if (double.TryParse(Output, out double value))
                 MemoryList.AddNumber(value);
         }
         public void MemorySubtract()
         {
+            // Convert to support base operations
             if (double.TryParse(Output, out double value))
                 MemoryList.SubtractNumber(value);
         }
         public void MemoryStore()
         {
-            if (double.TryParse(Output, out double value))
-                MemoryList.PushNumber(new MemoryNumber(value.ToString()));
+            MemoryList.PushNumber(new MemoryNumber(Output, currentBase));
         }
-        
+
 
         // Gestionare tastatură
         public void HandleKeyPress(KeyEventArgs e)
