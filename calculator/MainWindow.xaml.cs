@@ -77,8 +77,15 @@ namespace calculator
         // Funcții pentru memoria calculatorului
         private void MemoryClearBtn_Click(object sender, RoutedEventArgs e) => calculator.MemoryClear();
         private void MemoryRecallBtn_Click(object sender, RoutedEventArgs e) => calculator.MemoryRecall();
-        private void MemoryAddBtn_Click(object sender, RoutedEventArgs e) => calculator.MemoryAdd();
-        private void MemorySubstractBtn_Click(object sender, RoutedEventArgs e) => calculator.MemorySubtract();
+        private void MemoryAddBtn_Click(object sender, RoutedEventArgs e) 
+        {
+        
+            calculator.MemoryAdd(); 
+        }
+        private void MemorySubstractBtn_Click(object sender, RoutedEventArgs e) { 
+
+            calculator.MemorySubtract(); 
+        }
         private void MemoryStoreBtn_Click(object sender, RoutedEventArgs e) => calculator.MemoryStore();
         private void MemoryShowBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -103,6 +110,32 @@ namespace calculator
         {
             calculator.Backspace();
         }
+
+        private void Cut_Click(object sender, RoutedEventArgs e)
+        {
+            calculator.Cut();
+        }
+
+        private void Copy_Click(object sender, RoutedEventArgs e)
+        {
+            calculator.Copy();
+        }
+
+        private void Paste_Click(object sender, RoutedEventArgs e)
+        {
+            calculator.Paste();
+        }
+
+        private void DigitGrouping_Click(object sender, RoutedEventArgs e)
+        {
+            calculator.DigitGrouping();
+        }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            calculator.About();
+        }
+      
     }
 }
 

@@ -37,11 +37,23 @@
 
         </Grid.ColumnDefinitions>
 
-        <Menu VerticalAlignment="Top" Grid.Row="0" Grid.Column="4" >
+        <Menu VerticalAlignment="Top" Grid.Row="0" Grid.Column="4">
+            <MenuItem Header="Menu">
+                <MenuItem Header="File">
+                    <MenuItem Header="Cut" Click="Cut_Click"/>
+                    <MenuItem Header="Copy" Click="Copy_Click"/>
+                    <MenuItem Header="Paste" Click="Paste_Click"/>
+                    <MenuItem Header="Digit Grouping" Click="DigitGrouping_Click"/>
+                </MenuItem>
 
-            <MenuItem Header="Meniu">
-                <MenuItem Header="Standard" Click="OpenStandardMode"/>
-                <MenuItem Header="Programmer" Click="OpenProgrammerMode"/>
+                <MenuItem Header="Mode">
+                    <MenuItem Header="Standard" Click="OpenStandardMode"/>
+                    <MenuItem Header="Programmer" Click="OpenProgrammerMode"/>
+                </MenuItem>
+
+                <MenuItem Header="Help">
+                    <MenuItem Header="About" Click="About_Click"/>
+                </MenuItem>
             </MenuItem>
         </Menu>
 
@@ -268,7 +280,7 @@
 
         <!--OPERATORUL INMULTIT-->
         <Button x:Name="TimesBtn" 
-           Content="x" 
+           Content="×" 
            Grid.Row="5" 
            Grid.Column="3"
            FontSize="25"
@@ -278,7 +290,7 @@
 
         <!--OPERATORUL IMPARTIRE-->
         <Button x:Name="DivideBtn" 
-           Content="" 
+           Content="÷" 
            Grid.Row="4" 
            Grid.Column="3"
            FontSize="25"

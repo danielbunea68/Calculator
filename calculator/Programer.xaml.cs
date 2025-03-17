@@ -139,6 +139,31 @@ namespace calculator
                 }
             }
         }
+
+        private void Cut_Click(object sender, RoutedEventArgs e)
+        {
+            calculator.Cut();
+        }
+
+        private void Copy_Click(object sender, RoutedEventArgs e)
+        {
+            calculator.Copy();
+        }
+
+        private void Paste_Click(object sender, RoutedEventArgs e)
+        {
+            calculator.Paste();
+        }
+
+        private void DigitGrouping_Click(object sender, RoutedEventArgs e)
+        {
+            calculator.DigitGrouping();
+        }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            calculator.About();
+        }
     }
 
 

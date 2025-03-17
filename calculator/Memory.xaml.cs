@@ -30,5 +30,9 @@ namespace calculator
         {
             //(DataContext as MemoryListNumber).SelectedNumber = (sender as ListBox).SelectedItem as MemoryNumber;
         }
+        public int SelectedIndex
+        {
+            get { return MemoryListBox.SelectedIndex; }
+        }
     }
 }

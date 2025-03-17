@@ -13,11 +13,15 @@ namespace calculator
         private double secondOperand = 0;
         private string operation = "";
         private bool isNewEntry = true;
-        private double memory = 0;
+       /// <summary>
+       /// private double memory = 0;
+       /// </summary>
 
 
 
         private string memoryValue = "0";
+        private string clipboard = string.Empty;
+        private bool isDigitGrouping = true;
         private MemoryList memoryList;
 
         public string MemoryValue
@@ -58,12 +62,23 @@ namespace calculator
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void FormatOutput()
+        public void FormatOutput()
         {
-            if (double.TryParse(Output, out double number))
+
+            if (isDigitGrouping && double.TryParse(Output, out double number))
             {
-                Output = number.ToString("N0", CultureInfo.CurrentCulture);
+                Output = number.ToString("N0", CultureInfo.CurrentCulture); // Adaugă virgule
             }
+            else if (!isDigitGrouping)
+            {
+                // Elimină virgulele
+                string cleanedOutput = Output.Replace(",", "");
+                if (double.TryParse(cleanedOutput, out double cleanNumber))
+                {
+                    Output = cleanNumber.ToString(); // Reafișează numărul fără virgule
+                }
+            }
+         
         }
 
         public string ConvertToHex(string value)
@@ -217,8 +232,13 @@ namespace calculator
         // Setarea operației matematice
         public void SetOperation(string op)
         {
-            if (!isNewEntry)
+            if (!string.IsNullOrEmpty(Output))
             {
+                if (!string.IsNullOrEmpty(operation))
+                {
+                    CalculateResult();
+                }
+                
                 firstOperand = double.Parse(Output);
                 isNewEntry = true;
                 operation = op;
@@ -383,8 +403,6 @@ namespace calculator
             currentBase = 10; // Resetăm la baza decimală
         }
 
-     
-
         private bool IsValidInBase(string number, int baseValue)
         {
             // Verificăm dacă numărul este valid în baza specificată
@@ -397,6 +415,35 @@ namespace calculator
                 }
             }
             return true; // Valid
+        }
+        public void Cut()
+        {
+            clipboard = Output; // Salvează textul curent în clipboard
+            Output = "0"; // Resetează output-ul
+        }
+
+        public void Copy()
+        {
+            clipboard = Output; // Salvează textul curent în clipboard
+        }
+
+        public void Paste()
+        {
+            if (!string.IsNullOrEmpty(clipboard))
+            {
+                Output = clipboard; // Lipeste textul din clipboard
+            }
+        }
+
+        public void DigitGrouping()
+        {
+            isDigitGrouping = !isDigitGrouping;
+            FormatOutput();
+        }
+
+        public void About()
+        {
+            MessageBox.Show("Bune Daniel grupa LF331");
         }
     }
 }
