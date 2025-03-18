@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static calculator.Calculator;
 
 namespace calculator
 {
@@ -27,6 +28,8 @@ namespace calculator
             calculator = new Calculator();
             DataContext = calculator; // Legăm clasa Calculator la UI
             this.KeyDown += OnKeyDown;
+            calculator.SetBase(10);
+            DecRadioButton.IsChecked = true;
         }
 
 
@@ -104,12 +107,14 @@ namespace calculator
 
         private void OpenStandardMode(object sender, RoutedEventArgs e)
         {
+            calculator.SetMode(CalculatorMode.Standard);
             MainWindow standardWind = new();
             standardWind.ShowDialog();
         }
 
         private void OpenProgrammerMode(object sender, RoutedEventArgs e)
         {
+            calculator.SetMode(CalculatorMode.Programmer);
             Programer programerWind = new();
             programerWind.ShowDialog();
         }

@@ -24,6 +24,18 @@ namespace calculator
         private bool isDigitGrouping = true;
         private MemoryList memoryList;
 
+        public enum CalculatorMode
+        {
+            Standard,
+            Programmer
+        }
+
+        private CalculatorMode currentMode = CalculatorMode.Standard;
+
+        public void SetMode(CalculatorMode mode)
+        {
+            currentMode = mode;
+        }
         public string MemoryValue
         {
             get { return memoryValue; }
@@ -175,7 +187,16 @@ namespace calculator
                     case "×": Output = (firstOperand * secondOperand).ToString(); break;
                     case "÷":
                         if (secondOperand != 0)
-                            Output = (firstOperand / secondOperand).ToString();
+                        {
+                            //if (currentMode == CalculatorMode.Programmer)
+                            //{
+                            //    Output = TruncAfterDot((firstOperand / secondOperand).ToString());
+                            //}
+                            
+                            
+                               Output = (firstOperand / secondOperand).ToString();
+                            
+                        }
                         else
                             Output = "Eroare";
                         break;
@@ -186,6 +207,7 @@ namespace calculator
                 operation = "";
                 isNewEntry = true;
             }
+            Console.WriteLine($"First Operand: {firstOperand}, Second Operand: {secondOperand}, Operation: {operation}");
         }
 
         // Ștergere totală
@@ -276,12 +298,14 @@ namespace calculator
         {
             // AddNumber si Subtract number trebuie sa accepte (string value, int valueBase)
             // Convert to support base operations
-            if (double.TryParse(Output, out double value))
+            string value_to_add = ConvertValueToBase(Output, currentBase, MemoryList.PeekNumber()?.MemoryBase ?? 10 );
+            if (double.TryParse(value_to_add, out double value))
                 MemoryList.AddNumber(value);
         }
         public void MemorySubtract()
         {
             // Convert to support base operations
+            string value_to_add = ConvertValueToBase(Output, currentBase, MemoryList.PeekNumber()?.MemoryBase ?? 10);
             if (double.TryParse(Output, out double value))
                 MemoryList.SubtractNumber(value);
         }
@@ -297,18 +321,20 @@ namespace calculator
             if (e.Key >= Key.D0 && e.Key <= Key.D9)
             {
                 AppendNumber((e.Key - Key.D0).ToString());
+                
             }
             else if (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
             {
                 AppendNumber((e.Key - Key.NumPad0).ToString());
+               
             }
             else if (e.Key == Key.Add) SetOperation("+");
             else if (e.Key == Key.Subtract) SetOperation("-");
             else if (e.Key == Key.Multiply) SetOperation("×");
             else if (e.Key == Key.Divide) SetOperation("÷");
-            else if (e.Key == Key.Enter) CalculateResult();
+            else if (e.Key == Key.Enter) { CalculateResult(); e.Handled = true; }
             else if (e.Key == Key.Back) ClearEntry();
-            else if (e.Key == Key.Delete) Clear();
+            else if (e.Key == Key.Escape) Clear();
         }
         private int currentBase = 10; // Baza implicită
 

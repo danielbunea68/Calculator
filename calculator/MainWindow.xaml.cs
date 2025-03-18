@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static calculator.Calculator;
 
 namespace calculator
 {
@@ -96,12 +97,14 @@ namespace calculator
 
         private void OpenStandardMode(object sender, RoutedEventArgs e)
         {
+            calculator.SetMode(CalculatorMode.Standard);
             //MainWindow standardWind = new();
             ///standardWind.ShowDialog();
         }
 
         private void OpenProgrammerMode(object sender, RoutedEventArgs e)
         {
+            calculator.SetMode(CalculatorMode.Programmer);
             Programer programerWind = new();
             programerWind.ShowDialog();
         }
