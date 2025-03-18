@@ -20,7 +20,7 @@ namespace calculator
         {
             Numbers = new Stack<MemoryNumber>();
 
-            Numbers.Push(new MemoryNumber("0"));
+           /// Numbers.Push(new MemoryNumber("0"));
         }
 
         public void PushNumber(MemoryNumber number)
@@ -62,55 +62,62 @@ namespace calculator
 
         public void AddNumber(double value)
         {
-            if (Numbers.Count == 0)
+            if (Numbers.Count > 0)
             {
-                Numbers.Push(new MemoryNumber(value.ToString()));
-                return;
-            }
 
-            // Afișează dialogul pentru a selecta o intrare din memorie
-            string selectedMemory = ShowMemorySelectionDialog("Add to Memory");
 
-            if (!string.IsNullOrEmpty(selectedMemory))
-            {
-                double selectedValue = double.Parse(selectedMemory);
-                int selectedIndex = Numbers.ToList().FindIndex(m => m.MemoryValue == selectedValue.ToString());
 
-                if (selectedIndex != -1)
+                // Afișează dialogul pentru a selecta o intrare din memorie
+                string selectedMemory = ShowMemorySelectionDialog("Add to Memory");
+
+                if (!string.IsNullOrEmpty(selectedMemory))
                 {
-                    if (double.TryParse(Numbers.ElementAt(selectedIndex).MemoryValue, out double number))
+                    double selectedValue = double.Parse(selectedMemory);
+                    int selectedIndex = Numbers.ToList().FindIndex(m => m.MemoryValue == selectedValue.ToString());
+
+                    if (selectedIndex != -1)
                     {
-                        double newValue = number + value;
-                        Numbers.ElementAt(selectedIndex).MemoryValue = newValue.ToString();
+                        if (double.TryParse(Numbers.ElementAt(selectedIndex).MemoryValue, out double number))
+                        {
+                            double newValue = number + value;
+                            Numbers.ElementAt(selectedIndex).MemoryValue = newValue.ToString();
+                        }
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("No memory available.", "Error");
             }
         }
 
         public void SubtractNumber(double value)
         {
-            if (Numbers.Count == 0)
+            if (Numbers.Count > 0)
             {
-                Numbers.Push(new MemoryNumber(value.ToString()));
-                return;
-            }
 
-            // Afișează dialogul pentru a selecta o intrare din memorie
-            string selectedMemory = ShowMemorySelectionDialog("Subtract from Memory");
 
-            if (!string.IsNullOrEmpty(selectedMemory))
-            {
-                double selectedValue = double.Parse(selectedMemory);
-                int selectedIndex = Numbers.ToList().FindIndex(m => m.MemoryValue == selectedValue.ToString());
+                // Afișează dialogul pentru a selecta o intrare din memorie
+                string selectedMemory = ShowMemorySelectionDialog("Subtract from Memory");
 
-                if (selectedIndex != -1)
+                if (!string.IsNullOrEmpty(selectedMemory))
                 {
-                    if (double.TryParse(Numbers.ElementAt(selectedIndex).MemoryValue, out double number))
+                    double selectedValue = double.Parse(selectedMemory);
+                    int selectedIndex = Numbers.ToList().FindIndex(m => m.MemoryValue == selectedValue.ToString());
+
+                    if (selectedIndex != -1)
                     {
-                        double newValue = number - value;
-                        Numbers.ElementAt(selectedIndex).MemoryValue = newValue.ToString();
+                        if (double.TryParse(Numbers.ElementAt(selectedIndex).MemoryValue, out double number))
+                        {
+                            double newValue = number - value;
+                            Numbers.ElementAt(selectedIndex).MemoryValue = newValue.ToString();
+                        }
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("No memory available.", "Error");
             }
         }
         private string ShowMemorySelectionDialog(string operation)
