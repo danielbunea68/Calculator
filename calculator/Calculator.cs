@@ -326,20 +326,22 @@ namespace calculator
             if (e.Key >= Key.D0 && e.Key <= Key.D9)
             {
                 AppendNumber((e.Key - Key.D0).ToString());
-                
+                e.Handled = true;
+
             }
             else if (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
             {
                 AppendNumber((e.Key - Key.NumPad0).ToString());
-               
+                e.Handled = true;
+
             }
-            else if (e.Key == Key.Add) SetOperation("+");
-            else if (e.Key == Key.Subtract) SetOperation("-");
-            else if (e.Key == Key.Multiply) SetOperation("×");
-            else if (e.Key == Key.Divide) SetOperation("÷");
+            else if (e.Key == Key.Add) { SetOperation("+"); e.Handled = true; }
+            else if (e.Key == Key.Subtract) { SetOperation("-"); e.Handled = true; }
+            else if (e.Key == Key.Multiply) { SetOperation("×"); e.Handled = true; }
+            else if (e.Key == Key.Divide) { SetOperation("÷"); e.Handled = true; }
             else if (e.Key == Key.Enter) { CalculateResult(); e.Handled = true; }
-            else if (e.Key == Key.Back) ClearEntry();
-            else if (e.Key == Key.Escape) Clear();
+            else if (e.Key == Key.Back) { ClearEntry(); e.Handled = true; }
+            else if (e.Key == Key.Escape) {Clear(); e.Handled = true;}
         }
         private int currentBase = 10; // Baza implicită
 

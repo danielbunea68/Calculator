@@ -168,6 +168,11 @@ namespace calculator
         {
             calculator.About();
         }
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            OnKeyDown(sender, e);
+        }
     }
 
 
