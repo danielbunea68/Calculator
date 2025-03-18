@@ -188,13 +188,13 @@ namespace calculator
                     case "÷":
                         if (secondOperand != 0)
                         {
-                            //if (currentMode == CalculatorMode.Programmer)
-                            //{
-                            //    Output = TruncAfterDot((firstOperand / secondOperand).ToString());
-                            //}
-                            
-                            
-                               Output = (firstOperand / secondOperand).ToString();
+                            if (currentMode == CalculatorMode.Programmer)
+                            {
+                                Output = TruncAfterDot((firstOperand / secondOperand).ToString());
+                            }
+
+                            else 
+                                Output = (firstOperand / secondOperand).ToString();
                             
                         }
                         else

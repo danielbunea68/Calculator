@@ -26,6 +26,7 @@ namespace calculator
         {
             InitializeComponent();
             calculator = new Calculator();
+            calculator.SetMode(CalculatorMode.Programmer);
             DataContext = calculator; // Legăm clasa Calculator la UI
             this.KeyDown += OnKeyDown;
             calculator.SetBase(10);
@@ -107,14 +108,12 @@ namespace calculator
 
         private void OpenStandardMode(object sender, RoutedEventArgs e)
         {
-            calculator.SetMode(CalculatorMode.Standard);
             MainWindow standardWind = new();
             standardWind.ShowDialog();
         }
 
         private void OpenProgrammerMode(object sender, RoutedEventArgs e)
         {
-            calculator.SetMode(CalculatorMode.Programmer);
             Programer programerWind = new();
             programerWind.ShowDialog();
         }
