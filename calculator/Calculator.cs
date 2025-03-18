@@ -230,6 +230,7 @@ namespace calculator
         // Inversarea semnului
         public void Negate()
         {
+            CalculateResult();
             if (double.TryParse(Output, out double value))
             {
                 Output = (-value).ToString();
@@ -237,6 +238,7 @@ namespace calculator
         }
         public void Invert()
         {
+            CalculateResult();
             if (double.TryParse(Output, out double value) && value != 0)
             {
                 Output = (1 / value).ToString();
@@ -248,6 +250,7 @@ namespace calculator
         // Calcul procentual
         public void Percent()
         {
+            CalculateResult();
             if (double.TryParse(Output, out double value))
             {
                 Output = (value / 100).ToString();
@@ -257,6 +260,7 @@ namespace calculator
         // Radical pătrat
         public void SquareRoot()
         {
+            CalculateResult();
             if (double.TryParse(Output, out double value) && value >= 0)
             {
                 Output = Math.Sqrt(value).ToString();
@@ -270,6 +274,7 @@ namespace calculator
         // Ridicare la pătrat
         public void Square()
         {
+            CalculateResult();
             if (double.TryParse(Output, out double value))
             {
                 Output = (value * value).ToString();
